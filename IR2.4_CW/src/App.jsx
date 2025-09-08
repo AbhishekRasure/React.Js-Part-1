@@ -1,40 +1,41 @@
 import { useState } from 'react'
 
 
-const ProductsList = ( {products} ) => {
-  const totalPrice = products.reduce((acc, curr) => acc + curr.price, 0)
+const ProductsList = ( {products, productId} ) => {
+  const productDetail = products.find(product => product.id === productId)
 
-  return (
+  return(
     <div>
-      <h2>Total Price of Products</h2>
-      <p>${totalPrice}</p>
+      <h2>Product Data</h2>
+      <p>ID : {productDetail.id}</p>
+      <p>Name : {productDetail.name}</p>
+      <p>Price : {productDetail.price}</p>
     </div>
   )
 }
 
-const Restaurants = ( {restaurants}) => {
-  const totalRating = restaurants.reduce((acc, curr) => acc + curr.rating,0)
-
-  const averageRating = totalRating / restaurants.length
+const Restaurants = ( {restaurants, restaurantId} ) => {
+  const restaurantsDetail = restaurants.find(restaurant => restaurant.id === restaurantId)
 
   return(
     <div>
-      <h2>Total Rating of Restaurants</h2>
-      <p>{totalRating}</p>
-
-      <h2>Total Average Rating of Restaurants</h2>
-      <p>{averageRating.toFixed(2)}</p>
+      <h2>Restaurant Data</h2>
+      <p>ID : {restaurantsDetail.id}</p>
+      <p>Name : {restaurantsDetail.name}</p>
+      <p>Cuisine : {restaurantsDetail.cuisine}</p>
     </div>
   )
 }
 
-const Videos = ( {videos} ) => {
-  const totalViews = videos.reduce((acc, curr) => acc + curr.views , 0)
+const Videos = ( {videos, videosId}) => {
+  const videosDetail = videos.find(video => video.id === videosId)
 
   return(
     <div>
-      <h2>Total Views of Videos</h2>
-      <p>{totalViews}</p>
+      <h2>Videos Data</h2>
+      <p>ID : {videosDetail.id}</p>
+      <p>Title : {videosDetail.title}</p>
+      <p>Views : {videosDetail.views}</p>
     </div>
   )
 }
@@ -47,9 +48,9 @@ function App() {
   ]
 
   const restaurants = [
-    {id: 1, name: "Restaurant 1", cuisine: "Itanlian", rating: 5},
-    {id: 2, name: "Restaurant 2", cuisine: "Mexican", rating: 3.5},
-    {id: 3, name: "Restaurant 3", cuisine: "Chinese", rating: 2.7}
+    {id: 1, name: "Restaurant 1", cuisine: "Itanlian"},
+    {id: 2, name: "Restaurant 2", cuisine: "Mexican"},
+    {id: 3, name: "Restaurant 3", cuisine: "Chinese"}
   ]
 
   const videos = [
@@ -60,11 +61,11 @@ function App() {
 
   return (
     <>
-      <ProductsList products = {products}/>
+      <ProductsList products = {products} productId = {2}/>
       <hr/>
-      <Restaurants restaurants = {restaurants}/>
+      <Restaurants restaurants = {restaurants} restaurantId = {3}/>
       <hr/>
-      <Videos videos = {videos}/>
+      <Videos videos = {videos} videosId = {2}/>
     </>
   )
 }
